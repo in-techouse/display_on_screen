@@ -95,6 +95,10 @@
     font-size: 23px;
 }
 
+#accordion>.card>.card-header>.row>.rightBlock {
+    border-left: solid 2px #acacac;
+}
+
 #accordion>.card>.card-header>.row>div>.floatRight {
     float: right;
     margin-left: 10px;

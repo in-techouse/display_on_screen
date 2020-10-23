@@ -29,6 +29,8 @@ function selectFileForSlide(index) {
 }
 
 function fileChangeForSlide(event, index) {
+    $('.collapse').removeClass('show');
+    $("#collapse" + index).addClass("show");
     console.log("fileChangeForSlide, Index ", index);
     const file = $("#selectFileForSlide" + index)[0].files[0];
     console.log("fileChangeForSlide, File is:", file);
@@ -111,8 +113,9 @@ function addNewSlide() {
                           </p>
                       </h5>
                   </div>
-                  <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                  <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 rightBlock">
                       <span><i class="fa fa-clock-o" aria-hidden="true"></i>0 seconds</span>
+                      <i class="fa fa-arrows floatRight" aria-hidden="true"></i>
                       <i class="fa fa-trash floatRight iconTrash" aria-hidden="true"></i>
                       <i class="fa fa-paperclip floatRight" aria-hidden="true" onclick="selectFileForSlide('${slideBackendIndex}')"></i>
                       <input type="file" accept="image/*, video/*" id="selectFileForSlide${slideBackendIndex}" onchange="fileChangeForSlide(this, '${slideBackendIndex}')" />
@@ -160,5 +163,6 @@ function addNewSlide() {
     `;
     slideCount++;
     slideBackendIndex++;
+    $('.collapse').removeClass('show');
     $("#accordion").append(slide);
 }
