@@ -5,7 +5,27 @@ let slideCount = 2;
 let slideBackendIndex = 2;
 
 $(document).ready(function() {
-    $("#accordion").sortable();
+    $("#accordion").sortable({
+        start: function(event, ui) {
+            // var start_pos = ui.item.index();
+            // ui.item.data('start_pos', start_pos);
+            console.log("jQuery UI, Sortable Event Starts");
+        },
+        change: function(event, ui) {
+            console.log("jQuery UI, Sortable Event Change");
+            // var start_pos = ui.item.data('start_pos');
+            // var index = ui.placeholder.index();
+            // if (start_pos < index) {
+            //     $('#sortable li:nth-child(' + index + ')').addClass('highlights');
+            // } else {
+            //     $('#sortable li:eq(' + (index + 1) + ')').addClass('highlights');
+            // }
+        },
+        update: function(event, ui) {
+            console.log("jQuery UI, Sortable Event Update");
+            // $('#sortable li').removeClass('highlights');
+        }
+    });
     $("#accordion").disableSelection();
     $("#addNewSlide").click(function() {
         console.log("Add New Slide Clicked");
@@ -100,7 +120,7 @@ function showVideo(file, index) {
 
 function addNewSlide() {
     const slide = `
-        <div class="card">
+        <div class="card card${slideBackendIndex}">
           <div class="card-header">
               <div class="row">
                   <div class="col-8 col-sm-8 col-md-8 col-lg-8 col-xl-8">
@@ -116,7 +136,7 @@ function addNewSlide() {
                   <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 rightBlock">
                       <span><i class="fa fa-clock-o" aria-hidden="true"></i>0 seconds</span>
                       <i class="fa fa-arrows floatRight" aria-hidden="true"></i>
-                      <i class="fa fa-trash floatRight iconTrash" aria-hidden="true"></i>
+                      <i class="fa fa-trash floatRight iconTrash" aria-hidden="true" onclick="deleteSlide('${slideBackendIndex}')"></i>
                       <i class="fa fa-paperclip floatRight" aria-hidden="true" onclick="selectFileForSlide('${slideBackendIndex}')"></i>
                       <input type="file" accept="image/*, video/*" id="selectFileForSlide${slideBackendIndex}" onchange="fileChangeForSlide(this, '${slideBackendIndex}')" />
                   </div>
@@ -165,4 +185,10 @@ function addNewSlide() {
     slideBackendIndex++;
     $('.collapse').removeClass('show');
     $("#accordion").append(slide);
+}
+
+function deleteSlide(index) {
+    console.log("Delete File called for index:", index);
+    $(".card" + index).remove();
+    slideCount--;
 }
