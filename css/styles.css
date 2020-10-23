@@ -1,0 +1,149 @@
+.sliderHeader .floatRight {
+    float: right;
+    cursor: pointer;
+}
+
+#slideList {
+    list-style-type: none;
+    margin: 0;
+    padding: 10px 10px 10px 10px;
+    width: 100%;
+    background-color: green;
+}
+
+#slideList>li {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#slideList>li>div {
+    width: 100%;
+    background-color: white;
+}
+
+#slideList>li>div>div>div {
+    padding: 10px 10px 10px 10px;
+    border: solid 1px #acacac;
+    cursor: pointer;
+}
+
+#slideList li .leftBlock>h5>b {
+    margin-right: 7px;
+}
+
+#slideList li .leftBlock>h5>.icon {
+    margin-right: 7px;
+}
+
+#slideList li .leftBlock>h5>.fileName {
+    margin-right: 7px;
+}
+
+#slideList li .rightBlock>h5 {
+    width: 100%;
+}
+
+#slideList li .rightBlock>h5>.slideTimer {
+    background-color: #acacac;
+}
+
+#slideList li .rightBlock>h5>.expandSlide {
+    float: right;
+}
+
+
+/* New Styling */
+
+#accordion>.card {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#accordion>.card>.card-header>.row>div>h5 {
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+#accordion>.card>.card-header>.row>div>h5>p {
+    display: inline-block;
+}
+
+#accordion>.card>.card-header>.row>div>h5>p>.imageSlide {
+    display: none;
+    margin-left: 15px;
+}
+
+#accordion>.card>.card-header>.row>div>h5>p>.videoSlide {
+    display: none;
+    margin-left: 15px;
+}
+
+#accordion>.card>.card-header>.row>div>h5>p>.fileNameSlide {
+    display: none;
+}
+
+#accordion>.card>.card-header>.row>div i {
+    font-size: 23px;
+    margin-right: 7px;
+    cursor: pointer;
+}
+
+#accordion>.card>.card-header>.row>div>span {
+    font-size: 23px;
+}
+
+#accordion>.card>.card-header>.row>div>.floatRight {
+    float: right;
+    margin-left: 10px;
+}
+
+#accordion>.card>.card-header>.row>div>input {
+    display: none;
+}
+
+#accordion>.card>.card-header>.row>div>.iconTrash {
+    color: red;
+}
+
+#accordion>.card>div>.card-body>.row>div>img {
+    display: none;
+    width: 100%;
+    max-height: 600px;
+}
+
+#accordion>.card>div>.card-body>.row>div>video {
+    display: none;
+    width: 100%;
+    max-height: 600px;
+}
+
+#accordion>.card>div>.card-body>.row>div>div {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: none;
+}
+
+#accordion>.card>div>.card-body>.row>div>div>h6>i {
+    display: none;
+    color: #007bff;
+    font-size: 30px;
+}
+
+#accordion>.card>div>.card-body>.row>div>div>h6>.imageVideoLabel {
+    display: none;
+    color: #007bff;
+    font-size: 30px;
+    margin-left: 7px;
+}
+
+#accordion>.card>div>.card-body>.row>div>div>h6>b {
+    color: #007bff;
+    font-size: 20px;
+}
+
+#accordion>.card>div>.card-body>.row>div>div>h6>span {
+    font-size: 20px;
+}
