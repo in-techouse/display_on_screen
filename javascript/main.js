@@ -1,8 +1,10 @@
 const validImageTypes = ["image/gif", "image/jpeg", "image/png", "image/jpg"];
 const validVideoTypes = ["video/mp4", "video/m4v", "video/avi", "video/mov", "video/mpg", "video/mpeg"];
 
+let slideCount = 2;
+let slideBackendIndex = 2;
+
 $(document).ready(function() {
-    console.log("QIDIGO Doc is ready");
     $("#accordion").sortable();
     $("#accordion").disableSelection();
     $("#addNewSlide").click(function() {
@@ -94,4 +96,69 @@ function showVideo(file, index) {
     }, 500);
 }
 
-function addNewSlide() {}
+function addNewSlide() {
+    const slide = `
+        <div class="card">
+          <div class="card-header">
+              <div class="row">
+                  <div class="col-8 col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                      <h5 class="mb-0 btn-link" data-toggle="collapse" data-target="#collapse${slideBackendIndex}" aria-expanded="true" aria-controls="collapse${slideBackendIndex}">
+                          Slide # ${slideCount}
+                          <p>
+                              <i class="fa fa-file-image-o imageSlide imageSlide${slideBackendIndex}" aria-hidden="true"></i>
+                              <i class="fa fa-file-video-o videoSlide videoSlide${slideBackendIndex}" aria-hidden="true"></i>
+                              <span class="fileNameSlide fileNameSlide${slideBackendIndex}"></span>
+                          </p>
+                      </h5>
+                  </div>
+                  <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                      <span><i class="fa fa-clock-o" aria-hidden="true"></i>0 seconds</span>
+                      <i class="fa fa-trash floatRight iconTrash" aria-hidden="true"></i>
+                      <i class="fa fa-paperclip floatRight" aria-hidden="true" onclick="selectFileForSlide('${slideBackendIndex}')"></i>
+                      <input type="file" accept="image/*, video/*" id="selectFileForSlide${slideBackendIndex}" onchange="fileChangeForSlide(this, '${slideBackendIndex}')" />
+                  </div>
+              </div>
+          </div>
+          <div id="collapse${slideBackendIndex}" class="collapse show" data-parent="#accordion">
+              <div class="card-body">
+                  <div class="row">
+                      <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                          <img id="imageSlide${slideBackendIndex}" />
+                          <video controls id="videoSlide${slideBackendIndex}">
+                                  <source id="videoSourceSlide${slideBackendIndex}" />
+                              </video>
+                      </div>
+                      <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                          <div class="container sliderInfo${slideBackendIndex}">
+                              <h6>
+                                  <i class="fa fa-file-image-o imageIcon${slideBackendIndex}" aria-hidden="true"></i>
+                                  <i class="fa fa-file-video-o videoIcon${slideBackendIndex}" aria-hidden="true"></i>
+                                  <span class="imageVideoLabel" id="imageVideoLabel${slideBackendIndex}"></span>
+                              </h6>
+                              <h6>
+                                  <b>NAME:</b>
+                                  <span id="fileName${slideBackendIndex}"></span>
+                              </h6>
+                              <h6>
+                                  <b>SIZE:</b>
+                                  <span id="fileSize${slideBackendIndex}"></span>
+                              </h6>
+                              <h6>
+                                  <b>RESOLUTION:</b>
+                                  <span id="resolution${slideBackendIndex}"></span>
+                              </h6>
+                              <h6>
+                                  <b>LENGTH:</b>
+                                  <span id="length${slideBackendIndex}"></span>
+                              </h6>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    `;
+    slideCount++;
+    slideBackendIndex++;
+    $("#accordion").append(slide);
+}
