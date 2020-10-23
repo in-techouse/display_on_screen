@@ -7,23 +7,13 @@ let slideBackendIndex = 2;
 $(document).ready(function() {
     $("#accordion").sortable({
         start: function(event, ui) {
-            // var start_pos = ui.item.index();
-            // ui.item.data('start_pos', start_pos);
             console.log("jQuery UI, Sortable Event Starts");
         },
         change: function(event, ui) {
             console.log("jQuery UI, Sortable Event Change");
-            // var start_pos = ui.item.data('start_pos');
-            // var index = ui.placeholder.index();
-            // if (start_pos < index) {
-            //     $('#sortable li:nth-child(' + index + ')').addClass('highlights');
-            // } else {
-            //     $('#sortable li:eq(' + (index + 1) + ')').addClass('highlights');
-            // }
         },
         update: function(event, ui) {
-            console.log("jQuery UI, Sortable Event Update");
-            // $('#sortable li').removeClass('highlights');
+            updateSlidesIndex();
         }
     });
     $("#accordion").disableSelection();
@@ -32,6 +22,15 @@ $(document).ready(function() {
         addNewSlide();
     });
 });
+
+function updateSlidesIndex() {
+    const slides = $(".btn-link");
+    slideCount = 1;
+    slides.each(function(i, obj) {
+        obj.innerText = "Slide # " + slideCount;
+        slideCount++;
+    });
+}
 
 function selectFileForSlide(index) {
     console.log("selectFileForSlide, for index: ", index);
@@ -191,4 +190,5 @@ function deleteSlide(index) {
     console.log("Delete File called for index:", index);
     $(".card" + index).remove();
     slideCount--;
+    updateSlidesIndex();
 }
