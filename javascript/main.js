@@ -5,6 +5,7 @@ let slideCount = 2;
 let slideBackendIndex = 2;
 
 $(document).ready(function() {
+    toggleTrashIcon();
     $("#accordion").sortable({
         start: function(event, ui) {
             console.log("jQuery UI, Sortable Event Starts");
@@ -22,6 +23,15 @@ $(document).ready(function() {
         addNewSlide();
     });
 });
+
+function toggleTrashIcon(){
+    // Check slide count to show or hide selete icon
+    if ($(".slide").length === 1) {
+        $(".slide")[0].querySelector('.iconTrash').classList.add('hide');
+    }else if ($(".slide").find('.iconTrash.hide')[0]) {
+        $(".slide").find('.iconTrash.hide')[0].classList.remove('hide');
+    }
+}
 
 function updateSlidesIndex() {
     const slides = $(".btn-link");
@@ -114,12 +124,13 @@ function showVideo(file, index) {
         console.log("Video Resolution, Duration is: ", video[0].duration);
         $("#length" + index).text((video[0].duration / 60).toFixed(2) + " Minutes");
         $("#length" + index).parent().show(100);
+        $("#displayTime" + index).val(video[0].duration);
     }, 500);
 }
 
 function addNewSlide() {
     const slide = `
-        <div class="card card${slideBackendIndex}">
+        <div class="card card${slideBackendIndex} slide">
           <div class="card-header">
               <div class="row">
                   <div class="col-8 col-sm-8 col-md-8 col-lg-8 col-xl-8">
@@ -173,6 +184,10 @@ function addNewSlide() {
                                   <b>LENGTH:</b>
                                   <span id="length${slideBackendIndex}"></span>
                               </h6>
+                              <div>
+                                  <label>Display Time <small>in seconds</small></label>
+                                  <input type="number" name="display_time" id="displayTime${slideBackendIndex}" class="" min="0"/>
+                              </div>
                           </div>
                       </div>
                   </div>
@@ -184,6 +199,7 @@ function addNewSlide() {
     slideBackendIndex++;
     $('.collapse').removeClass('show');
     $("#accordion").append(slide);
+    toggleTrashIcon();
 }
 
 function deleteSlide(index) {
@@ -191,4 +207,39 @@ function deleteSlide(index) {
     $(".card" + index).remove();
     slideCount--;
     updateSlidesIndex();
+    toggleTrashIcon();
+}
+
+function runSlider() {
+    let file_elements = $(".slide").find('input[type=file]');
+    let files = []
+    file_elements.each(function(i, obj) {
+        let element;
+        if ($.inArray(obj.files[0].type, validImageTypes) > -1) {
+            element = `<img class="mySlides" src="${window.URL.createObjectURL(obj.files[0])}" style="width: 100%"></img>`
+        }else {
+            element = `<video class="mySlides" controls src="${window.URL.createObjectURL(obj.files[0])}" style="width: 100%"></video>`
+        }
+        $('#slideshow').append(element);
+    });
+
+    $("#slideshow")[0].classList.remove('hide');
+    $(".create-slide")[0].classList.add('hide');
+    carousel();
+}
+
+let myIndex = 0;
+
+function carousel(){
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+    }
+    myIndex++;
+    if (myIndex > x.length) {myIndex = 1}
+    x[myIndex-1].style.display = "block";
+    x[myIndex-1].style.minWidth = "100%";
+    x[myIndex-1].style.minHeight = "100%";
+    setTimeout(carousel, 5000); // Change image every 2 seconds
 }

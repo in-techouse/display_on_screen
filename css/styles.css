@@ -151,3 +151,13 @@
 #accordion>.card>div>.card-body>.row>div>div>h6>span {
     font-size: 20px;
 }
+
+.hide {
+    display: none!important;
+}
+
+/*For Slide show*/
+
+.mySlides {
+    display: none;
+}

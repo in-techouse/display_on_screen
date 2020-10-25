@@ -19,79 +19,90 @@
 </head>
 
 <body>
-    <div class="container">
+    <div id="slideshow" class="w3-content w3-section hide">
+    </div>
+
+    <div class="container create-slide">
         <div class="row sliderHeader">
             <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                <h4>Screen 01
-                    <h4>
+                <h4>Screen 01</h4>
             </div>
             <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                <button class="float-right" id="runSlider1" onclick="runSlider()">Run Slider</button>
                 <h4 class="floatRight" id="addNewSlide">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                 </h4>
             </div>
         </div>
-        <div id="accordion">
-            <div class="card card1">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col-8 col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                            <h5 class="mb-0 btn-link" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
-                                Slide # 1
-                                <p>
-                                    <i class="fa fa-file-image-o imageSlide imageSlide1" aria-hidden="true"></i>
-                                    <i class="fa fa-file-video-o videoSlide videoSlide1" aria-hidden="true"></i>
-                                    <span class="fileNameSlide fileNameSlide1"></span>
-                                </p>
-                            </h5>
-                        </div>
-                        <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 rightBlock">
-                            <span><i class="fa fa-clock-o" aria-hidden="true"></i>0 seconds</span>
-                            <i class="fa fa-arrows floatRight" aria-hidden="true"></i>
-                            <i class="fa fa-paperclip floatRight" aria-hidden="true" onclick="selectFileForSlide(1)"></i>
-                            <input type="file" accept="image/*, video/*" id="selectFileForSlide1" onchange="fileChangeForSlide(this, 1)" />
+        <form>
+            <div id="accordion">
+                <div class="card card1 slide">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-8 col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                                <h5 class="mb-0 btn-link" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
+                                    Slide # 1
+                                    <p>
+                                        <i class="fa fa-file-image-o imageSlide imageSlide1" aria-hidden="true"></i>
+                                        <i class="fa fa-file-video-o videoSlide videoSlide1" aria-hidden="true"></i>
+                                        <span class="fileNameSlide fileNameSlide1"></span>
+                                    </p>
+                                </h5>
+                            </div>
+                            <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 rightBlock">
+                                <span><i class="fa fa-clock-o" aria-hidden="true"></i>0 seconds</span>
+                                <i class="fa fa-arrows floatRight" aria-hidden="true"></i>
+                                <i class="fa fa-trash floatRight iconTrash" aria-hidden="true" onclick="deleteSlide('${slideBackendIndex}')"></i>
+                                <i class="fa fa-paperclip floatRight" aria-hidden="true" onclick="selectFileForSlide(1)"></i>
+                                <input type="file" accept="image/*, video/*" id="selectFileForSlide1" onchange="fileChangeForSlide(this, 1)" />
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div id="collapse1" class="collapse show" data-parent="#accordion">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                                <img id="imageSlide1" />
-                                <video controls id="videoSlide1">
-                                        <source id="videoSourceSlide1" />
-                                    </video>
-                            </div>
-                            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                                <div class="container sliderInfo1">
-                                    <h6>
-                                        <i class="fa fa-file-image-o imageIcon1" aria-hidden="true"></i>
-                                        <i class="fa fa-file-video-o videoIcon1" aria-hidden="true"></i>
-                                        <span class="imageVideoLabel" id="imageVideoLabel1"></span>
-                                    </h6>
-                                    <h6>
-                                        <b>NAME:</b>
-                                        <span id="fileName1"></span>
-                                    </h6>
-                                    <h6>
-                                        <b>SIZE:</b>
-                                        <span id="fileSize1"></span>
-                                    </h6>
-                                    <h6>
-                                        <b>RESOLUTION:</b>
-                                        <span id="resolution1"></span>
-                                    </h6>
-                                    <h6>
-                                        <b>LENGTH:</b>
-                                        <span id="length1"></span>
-                                    </h6>
+                    <div id="collapse1" class="collapse show" data-parent="#accordion">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                    <img id="imageSlide1" />
+                                    <video controls id="videoSlide1">
+                                            <source id="videoSourceSlide1" />
+                                        </video>
+                                </div>
+                                <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                    <div class="container sliderInfo1">
+                                        <h6>
+                                            <i class="fa fa-file-image-o imageIcon1" aria-hidden="true"></i>
+                                            <i class="fa fa-file-video-o videoIcon1" aria-hidden="true"></i>
+                                            <span class="imageVideoLabel" id="imageVideoLabel1"></span>
+                                        </h6>
+                                        <h6>
+                                            <b>NAME:</b>
+                                            <span id="fileName1"></span>
+                                        </h6>
+                                        <h6>
+                                            <b>SIZE:</b>
+                                            <span id="fileSize1"></span>
+                                        </h6>
+                                        <h6>
+                                            <b>RESOLUTION:</b>
+                                            <span id="resolution1"></span>
+                                        </h6>
+                                        <h6>
+                                            <b>LENGTH:</b>
+                                            <span id="length1"></span>
+                                        </h6>
+                                        <div>
+                                            <label>Display Time <small>in seconds</small></label>
+                                            <input type="number" name="display_time" class="" id="displayTime1" min="0"/>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
+    </div>
 </body>
 
 </html>
